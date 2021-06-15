@@ -1,0 +1,16 @@
+{
+	"name": "jalno/lumen",
+	"version": "0.0.1",
+	"autoload": {
+		"psr-4": {
+			"Jalno\\Lumen\\": "src/"
+		},
+		"files": [
+			"src/helpers.php"
+		]
+	},
+	"require": {
+		"laravel/lumen": "^8.0",
+		"jalno/autodiscovery": "^0.0.1"
+	}
+}
