@@ -1,7 +1,6 @@
 <?php
 namespace Jalno\Lumen\Contracts;
 
-
 use Laravel\Lumen\Routing\Router;
 
 interface IPackage {
@@ -26,4 +25,8 @@ interface IPackage {
      * @return array
      */
 	public function getCommands(): array;
+
+	public function storage(): IStorage;
+
+	public function getStorageConfig(): array;
 }

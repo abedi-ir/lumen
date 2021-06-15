@@ -3,7 +3,7 @@ namespace Jalno\Lumen\Packages;
 
 use RuntimeException;
 use Laravel\Lumen\Routing\Router;
-use Jalno\Lumen\Contracts\IPackage;
+use Jalno\Lumen\Contracts\{IPackage, IStorage};
 
 abstract class PackageAbstract implements IPackage {
 
@@ -72,5 +72,37 @@ abstract class PackageAbstract implements IPackage {
 	public function getCommands(): array
 	{
 		return [];
+	}
+
+	public function storage(): IStorage
+	{
+		return app(IStorage::class, [$this]);
+	}
+
+	public function getStorageConfig(): array
+	{
+		return app('config')->has("jalno.lumen.filesystems.disks") ?
+				config("jalno.lumen.filesystems.disks") :
+				[
+					'local' => [
+						'driver' => 'local',
+						'root' => storage_path('app'),
+					],
+					'public' => [
+						'driver' => 'local',
+						'root' => storage_path('app/public'),
+						'url' => env('APP_URL').'/storage',
+						'visibility' => 'public',
+					],
+					's3' => [
+						'driver' => 's3',
+						'key' => env('AWS_ACCESS_KEY_ID'),
+						'secret' => env('AWS_SECRET_ACCESS_KEY'),
+						'region' => env('AWS_DEFAULT_REGION'),
+						'bucket' => env('AWS_BUCKET'),
+						'url' => env('AWS_URL'),
+						'endpoint' => env('AWS_ENDPOINT'),
+					],
+				];
 	}
 }
