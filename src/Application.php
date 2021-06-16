@@ -22,6 +22,7 @@ class Application extends ParentApplication
         parent::__construct($basePath);
         $this->singleton(ConsoleKernelContract::class, Console\Kernel::class);
         $this->register(AutoDiscoverProvider::class);
+        $this->make(Contracts\IAutoDiscovery::class)->register();
     }
 
     /**
