@@ -15,12 +15,14 @@ jobs:
     - name: Validate composer.json and composer.lock
       uses: php-actions/composer@v6
       with:
-        command: composer validate
+        command: validate
+        php_version: 8.0
 
     - name: Install dependencies
       uses: php-actions/composer@v6
       with:
-        command: composer install --prefer-dist
+        command: install --prefer-dist
+        php_version: 8.0
 
     - name: PHPStan Static Analysis
       uses: php-actions/phpstan@v2
