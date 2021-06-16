@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     /**
      * Get the commands to add to the application.
      *
-     * @return string[]
+     * @return array<class-string>
      */
     protected function getCommands()
     {

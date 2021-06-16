@@ -22,7 +22,7 @@ interface IPackage {
 	/**
      * Get the commands to add to the application.
      *
-     * @return string[]
+     * @return array<class-string>
      */
 	public function getCommands(): array;
 
