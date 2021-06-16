@@ -16,9 +16,11 @@ class MigrateMakeCommand extends ParentCommand
      */
     protected function getMigrationPath()
     {
-        if (! is_null($targetPath = $this->input->getOption('path'))) {
+        /** @var string|null $targetPath */
+        $targetPath = $this->input->getOption('path');
+        if (! is_null($targetPath)) {
             return ! $this->usingRealPath()
-                            ? $this->laravel->basePath().'/'.$targetPath
+                            ? $this->laravel->basePath() . '/' . $targetPath
                             : $targetPath;
         }
 

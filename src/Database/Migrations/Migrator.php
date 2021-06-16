@@ -48,7 +48,7 @@ class Migrator extends ParentMigrator
     /**
      * Get all of the migration files in a given path.
      *
-     * @param  string|array  $paths
+     * @param  string|string[] $paths
      * @return string[]
      */
     public function getMigrationFiles($paths)

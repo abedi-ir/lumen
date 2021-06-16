@@ -17,7 +17,7 @@ class MigrateCommand extends ParentCommand
 	/**
      * Get all of the migration paths.
      *
-     * @return array
+     * @return string[]
      */
     protected function getMigrationPaths()
     {

@@ -22,11 +22,14 @@ interface IPackage {
 	/**
      * Get the commands to add to the application.
      *
-     * @return array
+     * @return string[]
      */
 	public function getCommands(): array;
 
 	public function storage(): IStorage;
 
+	/**
+	 * @return array<array<string,string|bool|mixed>>
+	 */
 	public function getStorageConfig(): array;
 }

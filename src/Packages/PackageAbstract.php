@@ -69,7 +69,7 @@ abstract class PackageAbstract implements IPackage {
 	/**
      * Get the commands to add to the application.
      *
-     * @return array
+     * @return string[]
      */
 	public function getCommands(): array
 	{

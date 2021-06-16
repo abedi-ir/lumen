@@ -5,6 +5,10 @@ use Jalno\Lumen\Contracts\IPackage;
 
 trait MigratePathTrait {
 
+    /**
+     * @param IPackage|null $package
+     * @return string[]
+     */
     protected function dependenciesMigrationPath(?IPackage $package = null): array
     {
         /** @var \Jalno\Lumen\Application */
