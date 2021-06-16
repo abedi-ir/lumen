@@ -71,7 +71,7 @@ class Migrator extends ParentMigrator
     {
         $packages = array_values($this->packages->all());
         $paths = array_values(array_map(fn($package) => $package->basePath(), $packages));
-        $findPositionOfPackage = function($file) use ($paths, $packages): int
+        $findPositionOfPackage = function($file) use ($paths): int
         {
             foreach ($paths as $x => $path) {
                 if (substr($file, 0, strlen($path) + 1) == $path . DIRECTORY_SEPARATOR) {
