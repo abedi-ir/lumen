@@ -19,7 +19,7 @@ class Application extends ParentApplication
      * @param IPackages $packages
      * @return void
      */
-    public function __construct($basePath = null, string $primaryPackage, IPackages $packages)
+    public function __construct($basePath, string $primaryPackage, IPackages $packages)
     {
         $this->packages = $packages;
         $this->register(Packages\PackagesServiceProvider::class);
