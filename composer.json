@@ -1,6 +1,7 @@
 {
 	"name": "jalno/lumen",
 	"version": "0.0.1",
+	"description": "jalno lumen",
 	"autoload": {
 		"psr-4": {
 			"Jalno\\Lumen\\": "src/"
