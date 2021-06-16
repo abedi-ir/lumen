@@ -1,6 +1,7 @@
 <?php
 namespace Jalno\Lumen;
 
+use Jalno\Lumen\Contracts\IPackages;
 use Jalno\Storage\Providers\StorageProvider;
 use Laravel\Lumen\Application as ParentApplication;
 use Jalno\AutoDiscovery\Providers\AutoDiscoverProvider;
@@ -8,6 +9,7 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 class Application extends ParentApplication
 {
+    protected $packages;
     protected $packagePath;
     /**
      * Create a new Lumen application instance.
@@ -16,8 +18,9 @@ class Application extends ParentApplication
      * @param class-string<Contracts\IPackage>
      * @return void
      */
-    public function __construct($basePath = null, string $primaryPackage)
+    public function __construct($basePath = null, string $primaryPackage, IPackages $packages)
     {
+        $this->packages = $packages;
         $this->register(Packages\PackagesServiceProvider::class);
         $this->packages->setPrimary($primaryPackage);
         parent::__construct($basePath);
