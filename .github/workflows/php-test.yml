@@ -25,3 +25,4 @@ jobs:
         configuration: phpstan.neon
         path: src
         memory_limit: 256M
+        php_version: 7.4
