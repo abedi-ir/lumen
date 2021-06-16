@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
             if (empty($package->getCommands())) {
                 continue;
             }
-            $commands = array_push($commands, ...$package->getCommands());
+            array_push($commands, ...$package->getCommands());
         }
         return $commands;
     }
