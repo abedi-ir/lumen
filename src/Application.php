@@ -1,7 +1,6 @@
 <?php
 namespace Jalno\Lumen;
 
-use Jalno\Storage\Providers\StorageProvider;
 use Laravel\Lumen\Application as ParentApplication;
 use Jalno\AutoDiscovery\Providers\AutoDiscoverProvider;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
@@ -23,7 +22,6 @@ class Application extends ParentApplication
         parent::__construct($basePath);
         $this->singleton(ConsoleKernelContract::class, Console\Kernel::class);
         $this->register(AutoDiscoverProvider::class);
-        $this->register(StorageProvider::class);
     }
 
     /**
