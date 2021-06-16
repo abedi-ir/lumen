@@ -49,7 +49,7 @@ class Migrator extends ParentMigrator
      * Get all of the migration files in a given path.
      *
      * @param  string|array  $paths
-     * @return array
+     * @return string[]
      */
     public function getMigrationFiles($paths)
     {
@@ -67,6 +67,10 @@ class Migrator extends ParentMigrator
             })->all();
     }
 
+    /**
+     * @param string[] $files
+     * @return string[] $files
+     */
     public function sortMigratationBasedOnPackages(array $files): array
     {
         $packages = array_values($this->packages->all());
@@ -105,6 +109,7 @@ class Migrator extends ParentMigrator
          * 
          * $file: /vendor/laravel/passport/database/migrations/2016_06_01_000001_create_oauth_auth_codes_table.php
          */
+        /** @var string $path */
         $path = realpath($path);
         $this->files->requireOnce($path);
         foreach (get_declared_classes() as $class) {

@@ -47,7 +47,9 @@ abstract class PackageAbstract implements IPackage {
             return $this->namespace;
         }
 		$packageName = get_class($this);
-        $composer = json_decode(file_get_contents($this->basePath() . DIRECTORY_SEPARATOR . 'composer.json'), true);
+		/** @var string $json */
+		$json = file_get_contents($this->basePath() . DIRECTORY_SEPARATOR . 'composer.json');
+		$composer = json_decode($json, true);
 
 		if (isset($composer['autoload']['psr-4'])) {
 			foreach ($composer['autoload']['psr-4'] as $namespace => $path) {

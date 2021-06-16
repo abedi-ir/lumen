@@ -7,11 +7,16 @@ trait MigratePathTrait {
 
     protected function dependenciesMigrationPath(?IPackage $package = null): array
     {
-        $packages = $this->laravel->packages;
+        /** @var \Jalno\Lumen\Application */
+        $laravel = $this->laravel;
+        $packages = $laravel->packages;
         if ($package === null) {
             $package = $packages->getPrimary();
         }
         $paths = [];
+        if (!$package) {
+            return $paths;
+        }
         foreach ($package->getDependencies() as $dependencyName) {
             $dependency = $packages->get($dependencyName);
             array_push($paths, ...$this->dependenciesMigrationPath($dependency));
@@ -23,10 +28,11 @@ trait MigratePathTrait {
 	/**
      * Get the path to the migration directory.
      *
-     * @return string
+     * @return string|null
      */
     protected function getMigrationPath()
     {
-        return $this->laravel->packages->getPrimary()->getMigrationPath();
+        $primaryPackage = $this->laravel->packages->getPrimary();
+        return $primaryPackage ? $primaryPackage->getMigrationPath() : null;
     }
 }

@@ -9,13 +9,14 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 class Application extends ParentApplication
 {
-    protected $packages;
-    protected $packagePath;
+    public IPackages $packages;
+
     /**
      * Create a new Lumen application instance.
      *
      * @param  string|null  $basePath
-     * @param class-string<Contracts\IPackage>
+     * @param class-string<Contracts\IPackage> $primaryPackage
+     * @param IPackages $packages
      * @return void
      */
     public function __construct($basePath = null, string $primaryPackage, IPackages $packages)
@@ -36,7 +37,11 @@ class Application extends ParentApplication
      */
     public function path()
     {
-        return $this->packages->getPrimary()->basePath();
+        $primaryPackage = $this->packages->getPrimary();
+        if ($primaryPackage) {
+            return $primaryPackage->basePath();
+        }
+        return parent::path();
     }
 
     /**
@@ -47,7 +52,11 @@ class Application extends ParentApplication
      */
     public function databasePath($path = '')
     {
-        return $this->packages->getPrimary()->getDatabasePath().($path ? DIRECTORY_SEPARATOR.$path : $path);
+        $primaryPackage = $this->packages->getPrimary();
+        if ($primaryPackage) {
+            return $primaryPackage->getDatabasePath().($path ? DIRECTORY_SEPARATOR.$path : $path);
+        }
+        return parent::databasePath($path);
     }
 
     /**

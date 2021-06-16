@@ -7,6 +7,13 @@ class MigrateCommand extends ParentCommand
 {
 	use MigratePathTrait;
 
+    /**
+     * The Laravel application instance.
+     *
+     * @var \Jalno\Lumen\Application
+     */
+    protected $laravel;
+
 	/**
      * Get all of the migration paths.
      *
@@ -24,8 +31,10 @@ class MigrateCommand extends ParentCommand
                                 : $path;
             })->all();
         }
-        return array_merge(
+        $result = array_merge(
             $this->migrator->paths(), $this->dependenciesMigrationPath(), [$this->getMigrationPath()]
         );
+        $migrationPath = $this->getMigrationPath();
+        return $migrationPath ? array_merge($result, [$migrationPath]) : $result;
     }
 }

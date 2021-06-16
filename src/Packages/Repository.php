@@ -15,7 +15,7 @@ class Repository implements IPackages {
 	protected array $packages = [];
 
 	/**
-	 * @var string-class<IPackage>|null
+	 * @var class-string<IPackage>|null $primary
 	 */
 	protected ?string $primary = null;
 
@@ -29,7 +29,7 @@ class Repository implements IPackages {
 		if (isset($this->packages[$package])) {
 			return;
 		}
-		if (!$package instanceof IPackage) {
+		if (!is_a($package, IPackage::class, true)) {
 			$package = new $package();
 		}
 		foreach ($package->getDependencies() as $dependency) {
@@ -39,19 +39,22 @@ class Repository implements IPackages {
 
 	}
 
+	/**
+	 * @param class-string<IPackage> $package
+	 */
 	public function setPrimary(string $package): void
 	{
 		$this->register($package);
 		$this->primary = $package;
 	}
 
-	public function getPrimary(): IPackage
+	public function getPrimary(): ?IPackage
 	{
-		return $this->get($this->primary);
+		return $this->primary ? $this->get($this->primary) : null;
 	}
 
 	/**
-	 * @param string-class<IPackage> $package
+	 * @param class-string<IPackage> $package
 	 */
 	public function has($package): bool
 	{
@@ -59,7 +62,7 @@ class Repository implements IPackages {
 	}
 
 	/**
-	 * @param string-class<IPackage> $package
+	 * @param class-string<IPackage> $package
 	 * @throws EntryNotFoundException  No package was found for **this** identifier.
 	 */
 	public function get($package): IPackage
